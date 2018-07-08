@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	//	"github.com/aws/aws-sdk-go/aws"
+
 	"github.com/aws/aws-lambda-go/lambda"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/ec2"
@@ -24,11 +24,15 @@ type Response struct {
 
 func Handler(ctx context.Context) {
 	result := getInstanceInfo()
-	fmt.Println(result)
+  for v, _ := range(result){
+			fmt.Println(result[v])
+	}
+
 }
 
-func getInstanceInfo() string {
-	var tagName, instance string
+func getInstanceInfo() []string {
+	var tagName string
+	var instances []string
 
 	params := &ec2.DescribeInstancesInput{}
 	res, err := svc.DescribeInstances(params)
@@ -44,8 +48,8 @@ func getInstanceInfo() string {
 					tagName = *tagInfo.Value
 				}
 			}
-			instance = tagName
+			instances = append(instances, tagName)
 		}
 	}
-	return instance
+	return instances
 }
