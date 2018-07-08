@@ -1,15 +1,14 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"os"
-	"context"
-//	"github.com/aws/aws-sdk-go/aws"
+	//	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-lambda-go/lambda"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/ec2"
 )
-
 
 var (
 	svc = ec2.New(session.New())
@@ -23,7 +22,7 @@ type Response struct {
 	Message string `json:"message"`
 }
 
-func Handler(ctx context.Context){
+func Handler(ctx context.Context) {
 	result := getInstanceInfo()
 	fmt.Println(result)
 }
@@ -46,7 +45,7 @@ func getInstanceInfo() string {
 				}
 			}
 			instance = tagName
-			}
 		}
+	}
 	return instance
 }
