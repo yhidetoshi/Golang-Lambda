@@ -24,8 +24,8 @@ type Response struct {
 
 func Handler(ctx context.Context) {
 	result := getInstanceInfo()
-  for v, _ := range(result){
-			fmt.Println(result[v])
+	for v, _ := range result {
+		fmt.Println(result[v])
 	}
 
 }
