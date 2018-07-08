@@ -1,0 +1,6 @@
+bin/
+src/
+pkg/
+serverless.yml
+# Serverless directories
+.serverless
